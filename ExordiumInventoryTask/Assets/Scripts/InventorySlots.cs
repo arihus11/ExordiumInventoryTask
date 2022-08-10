@@ -12,6 +12,9 @@ namespace Inventory.UI
     private InventoryItem _itemPrefab;
 
     [SerializeField]
+    private MouseFollower _mouseFollower;
+
+    [SerializeField]
     private RectTransform _contentPanel;
 
     List<InventoryItem> _listOfItems = new List<InventoryItem>();
@@ -38,6 +41,11 @@ namespace Inventory.UI
     }
 
     void Update(){
+        if(InventorySO.AddNewEmptySlot)
+        {
+            AddNewItemSlot();
+            InventorySO.AddNewEmptySlot = false;
+        }
     }
 
     public void AddNewItemSlot()
@@ -98,6 +106,10 @@ namespace Inventory.UI
        
     }
 
+    public void CreateDraggedItem(Sprite sprite, int quantity)
+    {
+        _mouseFollower.SetData(sprite,quantity);
+    }
     private void HandleSwap(InventoryItem obj)
     {
         int index = _listOfItems.IndexOf(obj);
@@ -109,6 +121,7 @@ namespace Inventory.UI
         HandleItemSelection(obj);
     }
     private void HandleEndDrag(InventoryItem obj){
+      _mouseFollower.ResetData();
       _currentlyDraggedItemIndex = -1;
     }
 
@@ -156,6 +169,7 @@ namespace Inventory.UI
     public void Hide()
     {
         gameObject.SetActive(false);
+        _mouseFollower.ResetData();
         _currentlyDraggedItemIndex = -1;
     }
 }
