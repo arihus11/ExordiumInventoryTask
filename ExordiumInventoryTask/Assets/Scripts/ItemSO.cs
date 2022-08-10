@@ -19,10 +19,12 @@ namespace Inventory.Model
         public string Name { get; set; }
 
         [field: SerializeField]
+        public EquipType EquipType { get; set; }
+
+        [field: SerializeField]
         public Sprite ItemImage { get; set; }
 
         
     }
-
 }
 

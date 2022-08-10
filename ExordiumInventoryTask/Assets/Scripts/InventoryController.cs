@@ -73,7 +73,23 @@ namespace Inventory
         }
 
         IItemAction itemAction = inventoryItem.Item as IItemAction;
-         _inventoryData.RemoveItem(index,1);
+        if(itemAction.ActionName == "Equip")
+        {
+            bool successEquippement = false;
+            if(itemAction != null)
+            {
+                successEquippement=itemAction.PerformAction(gameObject, true);
+            }
+
+            if(successEquippement == true)
+            {
+                IDestroyableItem destroyableItem = inventoryItem.Item as IDestroyableItem;
+                if(destroyableItem != null)
+                {
+                    _inventoryData.RemoveItem(index,1);
+                }
+            }
+        }
 
     }
 
@@ -91,7 +107,19 @@ namespace Inventory
         if(itemAction.ActionName == "Consume")
         {
             IDestroyableItem destroyableItem = inventoryItem.Item as IDestroyableItem;
-            _inventoryData.RemoveItem(index,1);   
+
+            bool success = false;
+            if(itemAction != null)
+            {
+                success = itemAction.PerformAction(gameObject, true);
+            } 
+            if(success)
+            {
+                if(destroyableItem != null)
+                {
+                    _inventoryData.RemoveItem(index,1);
+                }
+            }
         }
 
     }
@@ -102,6 +130,26 @@ namespace Inventory
         _inventoryUI.ResetSelection();
     }
 
+    public void PerformAction(int index, bool increase)
+    {
+        SingleItem inventoryItem = _inventoryData.GetItemAt(index);
+        if(inventoryItem.IsEmpty){
+            return;
+        }
+
+        IDestroyableItem destroyableItem = inventoryItem.Item as IDestroyableItem;
+        if(destroyableItem != null)
+        {
+            _inventoryData.RemoveItem(index,1);
+        }
+
+        IItemAction itemAction = inventoryItem.Item as IItemAction;
+        if(itemAction != null)
+        {
+            itemAction.PerformAction(gameObject, increase);
+        }
+
+    }
 
     private void HandleSelectRequested(int index){
         SingleItem inventoryItem = _inventoryData.GetItemAt(index);

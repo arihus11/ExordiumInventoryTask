@@ -8,6 +8,8 @@ namespace Inventory.Model
     [CreateAssetMenu]
     public class ConsumableItemSO : ItemSO, IDestroyableItem, IItemAction
     {   
+        [field: SerializeField]
+
         public string ActionName => "Consume";
 
         public bool PerformAction(GameObject character, bool increase)

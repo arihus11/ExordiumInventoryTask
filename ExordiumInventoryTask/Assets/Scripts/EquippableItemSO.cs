@@ -7,6 +7,7 @@ namespace Inventory.Model
     [CreateAssetMenu]
     public class EquippableItemSO : ItemSO, IDestroyableItem, IItemAction
     {
+        [field: SerializeField]
         
         public string ActionName => "Equip";
         
