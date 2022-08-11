@@ -9,6 +9,7 @@ namespace Inventory.Model
     public class ConsumableItemSO : ItemSO, IDestroyableItem, IItemAction
     {   
 
+
         public string ActionName => "Consume";
 
         public bool PerformAction(GameObject character, bool increase)
