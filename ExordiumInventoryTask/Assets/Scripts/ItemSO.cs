@@ -27,5 +27,11 @@ namespace Inventory.Model
         
     }
 
+    [Serializable]
+    public class ModifierData
+    {
+        public CharacterStatModifierSO statModifier;
+        public int value;
+    }
 }
 
