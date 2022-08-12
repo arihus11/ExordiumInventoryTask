@@ -1716,6 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryData: {fileID: 11400000, guid: 28e2bb0e77d7f614dbef3d5d213a57fc, type: 2}
+  _equippementData: {fileID: 11400000, guid: 76b731e04a2d6824dbcff96f8865ac07, type: 2}
 --- !u!114 &191472106
 MonoBehaviour:
   m_ObjectHideFlags: 0

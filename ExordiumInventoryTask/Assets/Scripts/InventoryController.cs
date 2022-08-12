@@ -81,7 +81,6 @@ namespace Inventory
         {
             return;
         }
-
         IItemAction itemAction = inventoryItem.Item as IItemAction;
         if(itemAction.ActionName == "Equip")
         {

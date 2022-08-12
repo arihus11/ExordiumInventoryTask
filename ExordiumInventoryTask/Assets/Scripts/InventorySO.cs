@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Inventory.UI;
+using Equippement.Model;
 
 
 namespace Inventory.Model
@@ -36,11 +37,11 @@ public class InventorySO : ScriptableObject
     public int AddItem(ItemSO item, int quantity)
     {
         CreateNewInventoryRow();
-        if(item.IsStackable == false)
+            if(item.IsStackable == false)
         {
             for(int i=0; i<_inventoryItems.Count; i++)
             {       
-                while(quantity > 0 && IsInventoryFull() == false)
+                while(quantity > 0)
                 {
                     quantity -= AddItemToFirstFreeSlot(item,1);
                 }
@@ -95,7 +96,7 @@ public class InventorySO : ScriptableObject
     }
 
     private int AddItemToFirstFreeSlot(ItemSO item, int quantity)
-    {
+    {   
          SingleItem newItem = new SingleItem
          {
             Item = item,
@@ -166,7 +167,7 @@ public class InventorySO : ScriptableObject
                 }
             }
         }
-        while(quantity > 0 && IsInventoryFull() == false)
+        while(quantity > 0)
         {
             int newQuantity = Mathf.Clamp(quantity,0, item.MaxStackSize);
             quantity -= newQuantity;

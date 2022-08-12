@@ -15,16 +15,8 @@ MonoBehaviour:
   _inventoryItems:
   - Quantity: 1
     Item: {fileID: 11400000, guid: 092808bb9e85ac44e95f1853fcafe21d, type: 2}
-  - Quantity: 1
-    Item: {fileID: 11400000, guid: 3fe6eaeca94a67444b49d80eca2b6e00, type: 2}
-  - Quantity: 1
-    Item: {fileID: 11400000, guid: c098197e5e7d20d49ad6cd30838ed0a9, type: 2}
   - Quantity: 0
     Item: {fileID: 0}
-  - Quantity: 1
-    Item: {fileID: 11400000, guid: a4c81c96257161a40aed3bd3a1dc6342, type: 2}
-  - Quantity: 1
-    Item: {fileID: 11400000, guid: c098197e5e7d20d49ad6cd30838ed0a9, type: 2}
   - Quantity: 1
     Item: {fileID: 11400000, guid: c098197e5e7d20d49ad6cd30838ed0a9, type: 2}
   - Quantity: 0
@@ -35,10 +27,4 @@ MonoBehaviour:
     Item: {fileID: 0}
   - Quantity: 0
     Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  <Size>k__BackingField: 14
+  <Size>k__BackingField: 7
