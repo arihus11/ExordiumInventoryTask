@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Inventory.UI;
 using Inventory.Model;
+using Equippement.Model;
 
 namespace Inventory
 {
@@ -13,6 +14,12 @@ namespace Inventory
 
     [SerializeField]
     private InventorySO _inventoryData;
+
+    [SerializeField]
+    private EquippementSO _equippementData;
+
+    [SerializeField]
+    private EquippementSlots _equipSlots;
 
     public List<SingleItem> InitialItems = new List<SingleItem>();
 
@@ -83,6 +90,7 @@ namespace Inventory
 
             if(successEquippement == true)
             {
+                _equippementData.EquipItem(inventoryItem.Item, inventoryItem.Item.EquipType);
                 IDestroyableItem destroyableItem = inventoryItem.Item as IDestroyableItem;
                 if(destroyableItem != null)
                 {

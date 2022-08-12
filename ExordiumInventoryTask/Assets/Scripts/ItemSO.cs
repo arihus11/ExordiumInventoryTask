@@ -26,5 +26,6 @@ namespace Inventory.Model
 
         
     }
+
 }
 
