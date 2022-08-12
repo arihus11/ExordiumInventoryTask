@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Inventory.Model;
+using Equippement.Model;
 
 public class CollisionDetection : MonoBehaviour
 {
@@ -10,10 +11,16 @@ public class CollisionDetection : MonoBehaviour
     public GameObject PickUpMessage;
     public static bool _pickUpEnabled = false;
     public static Item ItemInRange;
+    private GameObject ObjectInRange;
     // Start is called before the first frame update
 
     [SerializeField]
     private InventorySO _inventoryData;
+
+    [SerializeField]
+    private EquippementSO _equippementData;
+    [SerializeField]
+    private PickUpMechanics _pickupController;
 
     void Start()
     {
@@ -25,14 +32,14 @@ public class CollisionDetection : MonoBehaviour
     {
         #region PHYSICS OVERLAP CIRCLE
          Collider2D[] colliderArray = Physics2D.OverlapCircleAll(transform.position, _range);
-        if(colliderArray.Length >= 2){
-            foreach(Collider2D collider2D in colliderArray)
+         if(colliderArray.Length == 2){
+            foreach(Collider2D col in colliderArray)
             {
                     try
                     {
-                        if(collider2D.CompareTag("Item"))
+                        if(col.CompareTag("Item"))
                         {
-                            ProcessCollisionEnter(collider2D.gameObject);
+                            ProcessCollisionEnter(col.gameObject);
                             Array.Clear(colliderArray, 0, colliderArray.Length);
                         }
                     }
@@ -44,7 +51,10 @@ public class CollisionDetection : MonoBehaviour
         }
         else
         {
-            ProcessCollisionExit();
+            if(ObjectInRange!= null)
+            {
+                ProcessCollisionExit(ObjectInRange);
+            }
         }
         #endregion
 
@@ -57,27 +67,50 @@ public class CollisionDetection : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit.collider != null && _pickUpEnabled && hit.collider.gameObject.CompareTag("Item")) 
             {
-                int reminder = _inventoryData.AddItem(ItemInRange.SingleItem, ItemInRange.Quantity);
-                if(reminder == 0)
+                Item item = ItemInRange;
+                if(_pickupController.CheckIsCanBeEquipped(item.SingleItem))
                 {
-                    ItemInRange.DestroyItem();
+                    
+                    SingleItem newItem = new SingleItem
+                    {
+                         Item = item.SingleItem,
+                        Quantity = item.Quantity 
+                    };
+                    IItemAction itemAction = newItem.Item as IItemAction;
+                    bool successEquippement = false;
+                    successEquippement = itemAction.PerformAction(gameObject, true);
+                    _equippementData.EquipItem(item.SingleItem, item.SingleItem.EquipType);
+                    item.DestroyItem();
+                        
                 }
-                else{
-                    ItemInRange.Quantity = reminder;
+                else
+                {
+                    int reminder = _inventoryData.AddItem(ItemInRange.SingleItem, ItemInRange.Quantity);
+                    if(reminder == 0)
+                    {
+                        ItemInRange.DestroyItem();
+                    }
+                    else{
+                        ItemInRange.Quantity = reminder;
+                    }
                 }
             }
         }
         #endregion
     }
 
-    void ProcessCollisionEnter(GameObject collider){
+    void ProcessCollisionEnter(GameObject col){
             _pickUpEnabled = true;
-            ItemInRange = collider.GetComponent<Item>();
+            ItemInRange = col.GetComponent<Item>();
+            ObjectInRange = col;
+            col.transform.GetChild(0).gameObject.SetActive(true);
             PickUpMessage.SetActive(true);
     }
 
-    void ProcessCollisionExit(){
+    void ProcessCollisionExit(GameObject col){
             _pickUpEnabled = false;
+            ObjectInRange = null;
+            col.transform.GetChild(0).gameObject.SetActive(false);
             PickUpMessage.SetActive(false);
     }
 }
