@@ -51,11 +51,13 @@ namespace Inventory.UI{
     }
 
 
-    public void Select(){
+    public void Select()
+    {
         _borderImage.enabled = true;
     }
 
-    public void RemoveButtonPress(){
+    public void RemoveButtonPress()
+    {
         OnRemoveButtonPressed?.Invoke(this);
     }
 

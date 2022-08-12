@@ -72,6 +72,7 @@ namespace Inventory
             return;
         }
          _inventoryData.RemoveItem(index,1);
+         Debug.Log("Item dropped to the ground!");
     }
 
     private void HandleItemActionRequestedRight(int index)
@@ -138,6 +139,7 @@ namespace Inventory
     {
         _inventoryData.RemoveItem(index,quantity);
         _inventoryUI.ResetSelection();
+        Debug.Log("Item dropped to the ground!");
     }
 
     public void PerformAction(int index, bool increase)
@@ -210,6 +212,14 @@ namespace Inventory
             InventoryButton.SetActive(true);
             EquippementButton.SetActive(true);
             StatsButton.SetActive(true);
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            int index = _inventoryUI.GetCurrentSelectedItem();
+            if(index != -1)
+            {
+                DropItem(index, _inventoryData.GetItemAt(index).Quantity);
             }
         }
     }

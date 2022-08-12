@@ -24,12 +24,14 @@ namespace Inventory.UI
     private RectTransform _contentPanel;
 
     private bool _mouseOverDroppableArea = false;
+
     
     List<InventoryItem> _listOfItems = new List<InventoryItem>();
 
     public static bool UpdateInventorySlots = false;
 
     private int _currentlyDraggedItemIndex = -1;
+    public static int _currentlySelectedItem = -1;
 
     public event Action<int> OnItemActionRequestedMiddle, OnItemActionRequestedRight, OnStartDragging, OnSelectRequested, OnRemoveButtonPressed;
     public event Action <int,int> OnSwapItems;
@@ -82,7 +84,13 @@ namespace Inventory.UI
     public void UpdateSelection(int index)
     {
         DeselectAllItems();
+        _currentlySelectedItem = index;
         _listOfItems[index].Select();
+    }
+
+    public int GetCurrentSelectedItem()
+    {
+        return _currentlySelectedItem;
     }
 
     public void ResetAllItems()
@@ -93,7 +101,8 @@ namespace Inventory.UI
         }
     }
 
-    private void HandleRemoveButtonActions(InventoryItem obj){
+    private void HandleRemoveButtonActions(InventoryItem obj)
+    {
         int index = _listOfItems.IndexOf(obj);
          if(index == -1)
           {
@@ -207,6 +216,7 @@ namespace Inventory.UI
         foreach(InventoryItem item in _listOfItems)
         {
             item.Deselect();
+            _currentlySelectedItem = -1;
         }
     }
 
