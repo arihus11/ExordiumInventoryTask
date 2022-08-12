@@ -134,6 +134,7 @@ namespace Inventory.UI
         OnSwapItems?.Invoke(_currentlyDraggedItemIndex, index);
         HandleItemSelection(obj);
     }
+
     private void HandleEndDrag(InventoryItem obj){
       _mouseFollower.ResetData();
       _currentlyDraggedItemIndex = -1;
@@ -167,6 +168,12 @@ namespace Inventory.UI
     public void Show(){
         gameObject.SetActive(true);
         ResetSelection();
+    }
+
+    public void ResetMouseFollowerData()
+    {
+        _mouseFollower.ResetData();
+        _currentlyDraggedItemIndex = -1;
     }
 
     public void ResetSelection(){

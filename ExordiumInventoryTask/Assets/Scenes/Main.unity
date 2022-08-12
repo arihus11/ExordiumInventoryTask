@@ -1745,6 +1745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equipementUI: {fileID: 1346902407}
   _equippementData: {fileID: 11400000, guid: 76b731e04a2d6824dbcff96f8865ac07, type: 2}
+  _inventorySlots: {fileID: 166092361}
   InventoryButton: {fileID: 1214785695}
   EquippementButton: {fileID: 446710812}
   StatsButton: {fileID: 72453746}
@@ -1765,6 +1766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statPanel: {fileID: 1959646988}
   _statData: {fileID: 11400000, guid: 05bf5fffd007b384e960e5bfd1434ec4, type: 2}
+  _inventorySlots: {fileID: 166092361}
   InventoryButton: {fileID: 1214785695}
   EquippementButton: {fileID: 446710812}
   StatsButton: {fileID: 72453746}

@@ -4,6 +4,7 @@ using UnityEngine;
 using Equippement.Model;
 using Inventory.Model;
 using Equippement.UI;
+using Inventory.UI;
 
 namespace Equippement
 {
@@ -14,6 +15,9 @@ namespace Equippement
 
         [SerializeField]
         private EquippementSO _equippementData;
+
+         [SerializeField]
+        private InventorySlots _inventorySlots;
 
         [SerializeField]
          private GameObject InventoryButton,EquippementButton,StatsButton, InventoryPanel,StatsPanel;
@@ -83,6 +87,7 @@ namespace Equippement
             {
                 if(_equipementUI.isActiveAndEnabled == false)
                 {
+                    _inventorySlots.ResetMouseFollowerData();
                     _equipementUI.Show();
                     InventoryButton.SetActive(true);
                     EquippementButton.SetActive(false);

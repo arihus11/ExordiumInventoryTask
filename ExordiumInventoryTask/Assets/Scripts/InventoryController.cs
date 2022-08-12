@@ -173,13 +173,15 @@ namespace Inventory
     }
 
 
-    private void HandleDragging(int index){
+    private void HandleDragging(int index)
+    {
         SingleItem inventoryItem = _inventoryData.GetItemAt(index);
         if(inventoryItem.IsEmpty){
             return;
         }
         _inventoryUI.CreateDraggedItem(inventoryItem.Item.ItemImage, inventoryItem.Quantity);
     }
+
     private void HandleSwapItems(int index1, int index2)
     {
         _inventoryData.SwapItems(index1,index2);

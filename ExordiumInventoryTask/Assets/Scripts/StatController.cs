@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Stats.Model;
+using Inventory.UI;
 
 
     public class StatController : MonoBehaviour
@@ -12,6 +13,9 @@ using Stats.Model;
 
         [SerializeField]
         private StatsSO _statData;
+
+        [SerializeField]
+        private InventorySlots _inventorySlots;
 
         [SerializeField]
          private GameObject InventoryButton,EquippementButton,StatsButton, InventoryPanel, EquippementPanel;
@@ -28,6 +32,7 @@ using Stats.Model;
             {
                 if(!_statPanel.gameObject.activeInHierarchy)
                 {
+                    _inventorySlots.ResetMouseFollowerData();
                     _statPanel.SetActive(true);
                     InventoryButton.SetActive(true);
                     EquippementButton.SetActive(true);
