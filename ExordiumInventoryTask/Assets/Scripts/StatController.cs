@@ -13,6 +13,9 @@ using Stats.Model;
         [SerializeField]
         private StatsSO _statData;
 
+        [SerializeField]
+         private GameObject InventoryButton,EquippementButton,StatsButton, InventoryPanel, EquippementPanel;
+
         void Awake() 
         {
             _statPanel.SetActive(false);
@@ -26,10 +29,18 @@ using Stats.Model;
                 if(!_statPanel.gameObject.activeInHierarchy)
                 {
                     _statPanel.SetActive(true);
+                    InventoryButton.SetActive(true);
+                    EquippementButton.SetActive(true);
+                    StatsButton.SetActive(false);
+                    InventoryPanel.SetActive(false);
+                    EquippementPanel.SetActive(false);
                 }
                 else
                 {
                 _statPanel.SetActive(false);
+                InventoryButton.SetActive(true);
+                EquippementButton.SetActive(true);
+                StatsButton.SetActive(true);
                 }
             }
         }

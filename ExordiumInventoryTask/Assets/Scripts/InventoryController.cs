@@ -21,6 +21,9 @@ namespace Inventory
     [SerializeField]
     private EquippementSlots _equipSlots;
 
+    [SerializeField]
+    private GameObject InventoryButton,EquippementButton,StatsButton, StatsPanel, EquippementPanel;
+
     public List<SingleItem> InitialItems = new List<SingleItem>();
 
     private void Start()
@@ -190,6 +193,11 @@ namespace Inventory
             if(_inventoryUI.isActiveAndEnabled == false)
             {
                 _inventoryUI.Show();
+                InventoryButton.SetActive(false);
+                EquippementButton.SetActive(true);
+                StatsButton.SetActive(true);
+                StatsPanel.SetActive(false);
+                EquippementPanel.SetActive(false);
                 foreach(var item in _inventoryData.GetCurrentInventoryState())
                 {
                     _inventoryUI.UpdateData(item.Key, item.Value.Item.ItemImage, item.Value.Quantity);
@@ -198,6 +206,9 @@ namespace Inventory
             else
             {
             _inventoryUI.Hide();
+            InventoryButton.SetActive(true);
+            EquippementButton.SetActive(true);
+            StatsButton.SetActive(true);
             }
         }
     }

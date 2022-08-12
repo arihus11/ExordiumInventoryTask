@@ -15,6 +15,9 @@ namespace Equippement
         [SerializeField]
         private EquippementSO _equippementData;
 
+        [SerializeField]
+         private GameObject InventoryButton,EquippementButton,StatsButton, InventoryPanel,StatsPanel;
+
         public List<SingleEquipementItem> InitialEquippement = new List<SingleEquipementItem>();
 
         private void Start()
@@ -81,6 +84,11 @@ namespace Equippement
                 if(_equipementUI.isActiveAndEnabled == false)
                 {
                     _equipementUI.Show();
+                    InventoryButton.SetActive(true);
+                    EquippementButton.SetActive(false);
+                    StatsButton.SetActive(true);
+                    InventoryPanel.SetActive(false);
+                    StatsPanel.SetActive(false);
                     foreach(var item in _equippementData.GetCurrentEquippementState())
                     {
                         _equipementUI.UpdateData(item.Key, item.Value.Item.ItemImage);
@@ -89,6 +97,9 @@ namespace Equippement
                 else
                 {
                 _equipementUI.Hide();
+                InventoryButton.SetActive(true);
+                EquippementButton.SetActive(true);
+                StatsButton.SetActive(true);
                 }
             }
         }
