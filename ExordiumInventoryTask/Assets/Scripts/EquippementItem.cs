@@ -8,7 +8,7 @@ using Inventory.Model;
 
 namespace Equippement.UI
 {
-    public class EquippementItem : MonoBehaviour
+    public class EquippementItem : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
         private Image _itemImage;
@@ -19,12 +19,23 @@ namespace Equippement.UI
 
         private bool _empty = true;
 
-        public event Action<EquippementItem> OnRemoveEquippementRequested;
+        public event Action<EquippementItem> OnRemoveEquippementRequested, OnRightMouseButtonUnequipClicked;
 
 
         public void Awake()
         {
             ResetEquippementData();
+        }
+
+        public void OnPointerClick(PointerEventData pointerData)
+        {
+            if(pointerData.button == PointerEventData.InputButton.Right)
+            {
+                if(!_empty)
+                {
+                 OnRightMouseButtonUnequipClicked?.Invoke(this);
+                }
+            }
         }
 
         public void ResetEquippementData()
@@ -47,7 +58,7 @@ namespace Equippement.UI
 
         public void RemoveEquippementButtonPress()
         {
-            OnRemoveEquippementRequested?.Invoke(this);
+                OnRemoveEquippementRequested?.Invoke(this);
         }
     }
 }

@@ -9,7 +9,7 @@ using Equippement.Model;
 
 public class EquippementSlots : MonoBehaviour
 {
-    public event Action<EquipType, EquippementItem> OnRemoveEquippementRequested;
+    public event Action<EquipType, EquippementItem> OnRemoveEquippementRequested, OnRighMouseOnEquipped;
 
     [SerializeField]
     private EquippementItem _headSlot,_bodySlot,_weaponSlot,_shieldSlot;
@@ -24,6 +24,10 @@ public class EquippementSlots : MonoBehaviour
        _bodySlot.OnRemoveEquippementRequested += HandleRemoveEquippementActions;
        _weaponSlot.OnRemoveEquippementRequested += HandleRemoveEquippementActions;
        _shieldSlot.OnRemoveEquippementRequested += HandleRemoveEquippementActions;
+       _headSlot.OnRightMouseButtonUnequipClicked += HandleRemoveEquippementActions;
+       _bodySlot.OnRightMouseButtonUnequipClicked += HandleRemoveEquippementActions;
+       _weaponSlot.OnRightMouseButtonUnequipClicked += HandleRemoveEquippementActions;
+       _shieldSlot.OnRightMouseButtonUnequipClicked += HandleRemoveEquippementActions;
 
     }
 
@@ -37,22 +41,22 @@ public class EquippementSlots : MonoBehaviour
 
     private void HandleRemoveEquippementActions(EquippementItem item)
     {  
-        if(item == _headSlot)
-        {
-            OnRemoveEquippementRequested?.Invoke(EquipType.HEAD, item); 
-        }
-        else if(item == _bodySlot)
-        {
-            OnRemoveEquippementRequested?.Invoke(EquipType.BODY, item); 
-        }
-        else if(item == _weaponSlot)
-        {
-            OnRemoveEquippementRequested?.Invoke(EquipType.WEAPON, item); 
-        }
-        else if(item == _shieldSlot)
-        {
-            OnRemoveEquippementRequested?.Invoke(EquipType.SHIELD, item); 
-        }
+            if(item == _headSlot)
+            {
+                OnRemoveEquippementRequested?.Invoke(EquipType.HEAD, item); 
+            }
+            else if(item == _bodySlot)
+            {
+                OnRemoveEquippementRequested?.Invoke(EquipType.BODY, item); 
+            }
+            else if(item == _weaponSlot)
+            {
+                OnRemoveEquippementRequested?.Invoke(EquipType.WEAPON, item); 
+            }
+            else if(item == _shieldSlot)
+            {
+                OnRemoveEquippementRequested?.Invoke(EquipType.SHIELD, item); 
+            }
     }
 
     public void UpdateData(EquipType type, Sprite itemImage)

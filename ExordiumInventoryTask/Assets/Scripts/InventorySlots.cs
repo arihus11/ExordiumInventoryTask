@@ -22,6 +22,8 @@ namespace Inventory.UI
 
     [SerializeField]
     private RectTransform _contentPanel;
+
+    private bool _mouseOverDroppableArea = false;
     
     List<InventoryItem> _listOfItems = new List<InventoryItem>();
 
@@ -35,6 +37,7 @@ namespace Inventory.UI
 
     private void Awake(){
         Hide();
+        _mouseOverDroppableArea = false;
      //   _mouseFollower.Toggle(false);
     }
 
@@ -109,6 +112,16 @@ namespace Inventory.UI
          OnSelectRequested?.Invoke(index);
     }
 
+    public void MouseOverDroppingPoint()
+    {
+        _mouseOverDroppableArea = true;
+    }
+
+    public void MouseOutOfDroppingPoint()
+    {
+        _mouseOverDroppableArea = false;
+    }
+
     private void HandleBeginDrag(InventoryItem obj){
         int index = _listOfItems.IndexOf(obj);
         if(index == -1){
@@ -135,9 +148,19 @@ namespace Inventory.UI
         HandleItemSelection(obj);
     }
 
-    private void HandleEndDrag(InventoryItem obj){
-      _mouseFollower.ResetData();
-      _currentlyDraggedItemIndex = -1;
+    private void HandleEndDrag(InventoryItem obj)
+    {
+        if(_mouseOverDroppableArea)
+            {
+                Debug.Log("Item dropped to the ground");
+                _mouseFollower.ResetData();
+                _currentlyDraggedItemIndex = -1;
+            }
+        else
+        {
+        _mouseFollower.ResetData();
+        _currentlyDraggedItemIndex = -1;
+        }
     }
 
     public void UpdateData(int itemIndex, Sprite itemImage, int itemQuantity){
