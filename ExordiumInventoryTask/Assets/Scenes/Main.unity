@@ -55465,6 +55465,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item
       objectReference: {fileID: 0}
+    - target: {fileID: 3272970671807369916, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
+        type: 3}
+      propertyPath: <Quantity>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272970671807369916, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
+        type: 3}
+      propertyPath: <SingleItem>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fa3432497d78ff459f117ae8156d869,
+        type: 2}
     - target: {fileID: 3272970671807369917, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
         type: 3}
       propertyPath: m_RootOrder

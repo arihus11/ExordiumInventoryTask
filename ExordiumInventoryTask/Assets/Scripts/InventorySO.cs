@@ -20,6 +20,9 @@ public class InventorySO : ScriptableObject
 
     private InventorySlots _slots;
 
+    [SerializeField]
+    private GameObject _itemPrefab;
+
     [field: SerializeField]
     public int Size {get;private set;} = 10;
 
@@ -62,13 +65,19 @@ public class InventorySO : ScriptableObject
                 return;
             }
             int reminder = _inventoryItems[index].Quantity - amount;
+            _itemPrefab.GetComponent<Item>().SetSingleItem(_inventoryItems[index].Item);
+            _itemPrefab.GetComponent<Item>().SetQuantitiy(amount);
             if(reminder <= 0)
             {
                 _inventoryItems[index] = SingleItem.GetEmptyItem();
             }
-            else{
+            else
+            {
                 _inventoryItems[index] = _inventoryItems[index].ChangeQuantity(reminder);
             }
+            GameObject obj = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity);
+            obj.transform.SetParent(GameObject.Find("Items").gameObject.transform);
+            obj.transform.position = GameObject.Find("Character").gameObject.transform.position;
             InformAboutChange();
         }
         CheckIfRowEmpty();
