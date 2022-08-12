@@ -14,7 +14,8 @@ public class InventorySO : ScriptableObject
     [SerializeField]
     private List<SingleItem> _inventoryItems;
 
-    public static bool AddNewEmptySlot = false;
+    public static bool AddNewEmptyRow = false;
+    public static bool RemoveEmptyRow = false;
 
     private InventorySlots _slots;
 
@@ -34,11 +35,7 @@ public class InventorySO : ScriptableObject
 
     public int AddItem(ItemSO item, int quantity)
     {
-        if(IsInventoryFull() == true)
-         {
-            Debug.Log("I am full!"); 
-        }
-
+        CreateNewInventoryRow();
         if(item.IsStackable == false)
         {
             for(int i=0; i<_inventoryItems.Count; i++)
@@ -56,7 +53,8 @@ public class InventorySO : ScriptableObject
         return quantity;
     }
 
-    public void RemoveItem(int index, int amount){
+    public void RemoveItem(int index, int amount)
+    {
         if(_inventoryItems.Count > index)
         {
             if(_inventoryItems[index].IsEmpty){
@@ -72,6 +70,28 @@ public class InventorySO : ScriptableObject
             }
             InformAboutChange();
         }
+        CheckIfRowEmpty();
+    }
+
+    private bool CheckIfRowEmpty()
+    {
+       int emptyCount = 0;
+       for(int i=0; i<_inventoryItems.Count; i++)
+           {
+            if(_inventoryItems[i].IsEmpty)
+               {
+                     emptyCount++;
+                }
+                else
+                {
+                     emptyCount = 0;
+                }
+            }
+        if(emptyCount == 7)
+        {
+            Debug.Log("Empty row should be removed!");
+        }
+       return false;
     }
 
     private int AddItemToFirstFreeSlot(ItemSO item, int quantity)
@@ -91,6 +111,32 @@ public class InventorySO : ScriptableObject
             }
          }
          return 0;
+    }
+
+    private void CreateNewInventoryRow()
+    {
+        if(CountInventoryItems()  == _inventoryItems.Count)
+        {
+            Size += 7;
+            AddNewEmptyRow = true;
+            for(int i =0; i<7 ; i++)
+            {   
+                _inventoryItems.Add(SingleItem.GetEmptyItem());
+            }
+        }
+    }
+
+    private int CountInventoryItems()
+    {
+        int count = 0;
+        foreach(SingleItem item in _inventoryItems)
+        {
+            if(!item.IsEmpty)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     private bool IsInventoryFull()
@@ -155,6 +201,7 @@ public class InventorySO : ScriptableObject
         _inventoryItems[index1] = _inventoryItems[index2];
         _inventoryItems[index2] = item1;
         InformAboutChange();
+        CheckIfRowEmpty();
     }
     private void InformAboutChange(){
         OnInventoryUpdated?.Invoke(GetCurrentInventoryState());

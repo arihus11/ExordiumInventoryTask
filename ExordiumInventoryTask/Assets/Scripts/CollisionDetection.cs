@@ -28,10 +28,17 @@ public class CollisionDetection : MonoBehaviour
         if(colliderArray.Length >= 2){
             foreach(Collider2D collider2D in colliderArray)
             {
-                    if(collider2D.CompareTag("Item"))
+                    try
                     {
-                        ProcessCollisionEnter(collider2D.gameObject);
-                        Array.Clear(colliderArray, 0, colliderArray.Length);
+                        if(collider2D.CompareTag("Item"))
+                        {
+                            ProcessCollisionEnter(collider2D.gameObject);
+                            Array.Clear(colliderArray, 0, colliderArray.Length);
+                        }
+                    }
+                    catch(System.NullReferenceException ex)
+                    {
+                        Debug.Log("Null reference ignored.");
                     }
             }
         }

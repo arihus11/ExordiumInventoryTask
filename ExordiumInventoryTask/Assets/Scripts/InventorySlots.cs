@@ -12,11 +12,17 @@ namespace Inventory.UI
     private InventoryItem _itemPrefab;
 
     [SerializeField]
+    private InventorySO _inventorySO;
+
+    [SerializeField]
     private MouseFollower _mouseFollower;
 
     [SerializeField]
-    private RectTransform _contentPanel;
+    private GameObject _slotsParent;
 
+    [SerializeField]
+    private RectTransform _contentPanel;
+    
     List<InventoryItem> _listOfItems = new List<InventoryItem>();
 
     public static bool UpdateInventorySlots = false;
@@ -40,17 +46,25 @@ namespace Inventory.UI
         }
     }
 
-    void Update(){
-        if(InventorySO.AddNewEmptySlot)
+    void Update()
+    {
+        if(InventorySO.AddNewEmptyRow)
         {
-            AddNewItemSlot();
-            InventorySO.AddNewEmptySlot = false;
+            for(int i= 0; i<7; i++)
+            {
+                AddNewItemSlot();
+            }
+            foreach(var item in _inventorySO.GetCurrentInventoryState())
+            {
+                 UpdateData(item.Key, item.Value.Item.ItemImage, item.Value.Quantity);
+            }
+            InventorySO.AddNewEmptyRow = false;
         }
     }
 
     public void AddNewItemSlot()
     {
-         InventoryItem item = Instantiate(_itemPrefab, Vector3.zero,Quaternion.identity);
+            InventoryItem item = Instantiate(_itemPrefab, Vector3.zero,Quaternion.identity);
             item.transform.SetParent(_contentPanel);
             _listOfItems.Add(item);
             item.OnItemClicked += HandleItemSelection;
