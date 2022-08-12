@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Inventory.Model;
 
 public class CollisionDetection : MonoBehaviour
 {
     [SerializeField] private float _range = 1f;
     public GameObject PickUpMessage;
     public static bool _pickUpEnabled = false;
+    public static Item ItemInRange;
     // Start is called before the first frame update
+
+    [SerializeField]
+    private InventorySO _inventoryData;
 
     void Start()
     {
@@ -45,7 +50,14 @@ public class CollisionDetection : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit.collider != null && _pickUpEnabled && hit.collider.gameObject.CompareTag("Item")) 
             {
-                Debug.Log("Picked up");
+                int reminder = _inventoryData.AddItem(ItemInRange.SingleItem, ItemInRange.Quantity);
+                if(reminder == 0)
+                {
+                    ItemInRange.DestroyItem();
+                }
+                else{
+                    ItemInRange.Quantity = reminder;
+                }
             }
         }
         #endregion
@@ -53,6 +65,7 @@ public class CollisionDetection : MonoBehaviour
 
     void ProcessCollisionEnter(GameObject collider){
             _pickUpEnabled = true;
+            ItemInRange = collider.GetComponent<Item>();
             PickUpMessage.SetActive(true);
     }
 
