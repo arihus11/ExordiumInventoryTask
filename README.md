@@ -3,10 +3,13 @@ Inventory System developed in Unity3D as a part of Exordium Programming Assignme
 
 !!!! NAPOMENA: 
 ______________
-Rješavanje zadatka je započeto u verziji Unity Editora korištenoj za izradu prethodnog InventorySystem zadatka (2019.2.17f1) te je naknadno projekt 
-prebačen u novu verziju (2020.3.33f1) što je rezultiralo problemima sa skaliranjem UI-a. Projekt ispravno funkcionira jedino na 16:9 i skaliranje nije podešeno
-za 16:10 zbog nedostatka vremena. Također, ukoliko se igra testira pokretanjem build verzije, a ne unutar editora, funkcionalnosti Equippement Panela izostaju iz nepoznatog
-razloga. Iste funkcionalnosti kao i sve druge unutar editora funkcioniraju normalno.
+Ukoliko se igra testira pokretanjem build verzije, a ne unutar editora, funkcionalnosti Equippement Panela izostaju iz nepoznatog razloga. 
+Gumb za Unequip i RMB za istu akciju ne ažuriraju prikaz slotova unutar Equip Panela ali se isti itemi pojavljuju unutar slotova Inventory Panela
+i statistika se računa kao da je Unequip akcija izvršena. Ako je igra pokrenuta unutar editora, sve funkcionalnosti svih panela rade ispravno i slotovi se ažuriraju ispravno.
+Zbog vremenskog ograničenja nisam uspio otkriti uzrok takve specifične razlike unutar editora i builda.
+
+Skaliranje sa veličinom ekrana je podešeno za 16:9 i 16:10, no moguće su sitne razlike unutar editora za razliku od build verzije. Unutar editora testiranje je preporučeno
+u FullHD(1920x1080).
 
 UPUTE:
 ______
