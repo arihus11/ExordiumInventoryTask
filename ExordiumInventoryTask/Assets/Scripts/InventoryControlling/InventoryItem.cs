@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
 
-namespace Inventory.UI{
+namespace Inventory.UI
+{
     public class InventoryItem : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
     [SerializeField]
     private Image _itemImage;
     [SerializeField]
     private Text _quantity;
-
     [SerializeField]
     private Image _borderImage;
 

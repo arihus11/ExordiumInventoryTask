@@ -12,6 +12,11 @@ public class StatUI : MonoBehaviour
     [SerializeField]
     private StatsSO _statData;
 
+    void Awake()
+    {
+        UpdateStatTexts();
+    }
+
     public void UpdateStat(StatType statType, int newVal)
     {
         switch(statType)
@@ -37,10 +42,14 @@ public class StatUI : MonoBehaviour
 
     public void Update()
     {
+        UpdateStatTexts();
+    }
+
+    void UpdateStatTexts()
+    {
         _healthText.text = (_statData.GetStatFor(StatType.HEALTH)).ToString();
         _agilityText.text = (_statData.GetStatFor(StatType.AGILITY)).ToString();
         _attackText.text = (_statData.GetStatFor(StatType.ATTACK)).ToString();
         _defenseText.text = (_statData.GetStatFor(StatType.DEFENSE)).ToString();
-
     }
 }

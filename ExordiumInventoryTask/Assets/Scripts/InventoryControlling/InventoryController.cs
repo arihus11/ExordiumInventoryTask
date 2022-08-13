@@ -72,7 +72,6 @@ namespace Inventory
             return;
         }
          _inventoryData.RemoveItem(index,1);
-         Debug.Log("Item dropped to the ground!");
     }
 
     private void HandleItemActionRequestedRight(int index)
@@ -97,7 +96,7 @@ namespace Inventory
                 IDestroyableItem destroyableItem = inventoryItem.Item as IDestroyableItem;
                 if(destroyableItem != null)
                 {
-                    _inventoryData.RemoveItem(index,1);
+                    _inventoryData.ReduceItem(index,1);
                 }
             }
         }
@@ -128,7 +127,7 @@ namespace Inventory
             {
                 if(destroyableItem != null)
                 {
-                    _inventoryData.RemoveItem(index,1);
+                    _inventoryData.ReduceItem(index,1);
                 }
             }
         }

@@ -13,20 +13,6 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   _inventoryItems:
-  - Quantity: 2
-    Item: {fileID: 11400000, guid: 5fa3432497d78ff459f117ae8156d869, type: 2}
-  - Quantity: 1
-    Item: {fileID: 11400000, guid: 3fe6eaeca94a67444b49d80eca2b6e00, type: 2}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
-  - Quantity: 0
-    Item: {fileID: 0}
   - Quantity: 0
     Item: {fileID: 0}
   - Quantity: 0
@@ -43,4 +29,4 @@ MonoBehaviour:
     Item: {fileID: 0}
   _itemPrefab: {fileID: 3272970671807369914, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
     type: 3}
-  <Size>k__BackingField: 14
+  <Size>k__BackingField: 7

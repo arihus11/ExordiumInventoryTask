@@ -83,6 +83,29 @@ public class InventorySO : ScriptableObject
         CheckIfRowEmpty();
     }
 
+    public void ReduceItem(int index, int amount)
+    {
+        if(_inventoryItems.Count > index)
+        {
+            if(_inventoryItems[index].IsEmpty){
+                return;
+            }
+            int reminder = _inventoryItems[index].Quantity - amount;
+            _itemPrefab.GetComponent<Item>().SetSingleItem(_inventoryItems[index].Item);
+            _itemPrefab.GetComponent<Item>().SetQuantitiy(amount);
+            if(reminder <= 0)
+            {
+                _inventoryItems[index] = SingleItem.GetEmptyItem();
+            }
+            else
+            {
+                _inventoryItems[index] = _inventoryItems[index].ChangeQuantity(reminder);
+            }
+            InformAboutChange();
+        }
+        CheckIfRowEmpty();
+    }
+
     private bool CheckIfRowEmpty()
     {
        int emptyCount = 0;

@@ -14,8 +14,8 @@ namespace Stats.Model
 
         public void InitializeStats()
         {
-                _health = 90;
-                _agility = 100;
+                _health = 50;
+                _agility = 50;
                 _attack = 0;
                 _defense = 0;
         }
@@ -151,7 +151,7 @@ namespace Stats.Model
         {
             if((stat + value) > 100)
             {
-                Debug.Log("Unable to perform action: Overflow detected!");
+                Debug.Log("Unable to perform action: This stat reached its higher limit!");
                 return false;
             }
             return true;
@@ -161,7 +161,7 @@ namespace Stats.Model
         {
             if((stat - value) < 0)
             {
-                Debug.Log("Unable to perform action: Underflow detected!");
+                Debug.Log("Unable to perform action: This stat reached its lower limit!");
                 return false;
             }
             return true;
