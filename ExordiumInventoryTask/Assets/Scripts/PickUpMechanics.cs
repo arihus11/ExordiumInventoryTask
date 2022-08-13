@@ -19,31 +19,47 @@ public class PickUpMechanics : MonoBehaviour
             if(CollisionDetection._pickUpEnabled)
             {
                 Item item = CollisionDetection.ItemInRange;
-                if(CheckIsCanBeEquipped(item.SingleItem))
+                if(item.SingleItem.PermanentUsage)
                 {
-                    
                     SingleItem newItem = new SingleItem
-                    {
-                         Item = item.SingleItem,
-                        Quantity = item.Quantity 
-                    };
-                    IItemAction itemAction = newItem.Item as IItemAction;
-                    bool successEquippement = false;
-                    successEquippement = itemAction.PerformAction(gameObject, true);
-                    _equippementData.EquipItem(item.SingleItem, item.SingleItem.EquipType);
+                        {
+                            Item = item.SingleItem,
+                            Quantity = item.Quantity 
+                        };
+                        IItemAction itemAction = newItem.Item as IItemAction;
+                        bool successEquippement = false;
+                        successEquippement = itemAction.PerformAction(gameObject, true);
+                    Debug.Log("Permanent usage item " + item.SingleItem.Name + " has been used!");
                     item.DestroyItem();
-                        
                 }
                 else
                 {
-                    int reminder = _inventoryData.AddItem(item.SingleItem, item.Quantity);
-                    if(reminder == 0)
+                    if(CheckIsCanBeEquipped(item.SingleItem))
                     {
+                        
+                        SingleItem newItem = new SingleItem
+                        {
+                            Item = item.SingleItem,
+                            Quantity = item.Quantity 
+                        };
+                        IItemAction itemAction = newItem.Item as IItemAction;
+                        bool successEquippement = false;
+                        successEquippement = itemAction.PerformAction(gameObject, true);
+                        _equippementData.EquipItem(item.SingleItem, item.SingleItem.EquipType);
                         item.DestroyItem();
+                            
                     }
                     else
                     {
-                        item.Quantity = reminder;
+                        int reminder = _inventoryData.AddItem(item.SingleItem, item.Quantity);
+                        if(reminder == 0)
+                        {
+                            item.DestroyItem();
+                        }
+                        else
+                        {
+                            item.Quantity = reminder;
+                        }
                     }
                 }
             }

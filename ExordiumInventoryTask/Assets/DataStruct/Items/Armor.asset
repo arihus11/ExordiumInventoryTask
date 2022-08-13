@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f0e2a107e4618489c8bfe57cc55a89, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
+  <PermanentUsage>k__BackingField: 0
   <IsStackable>k__BackingField: 0
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Armor
   <EquipType>k__BackingField: 1
   <ItemImage>k__BackingField: {fileID: 4365789658952885431, guid: 0ba961d82dad0d64588584957b7aef4d,
     type: 3}

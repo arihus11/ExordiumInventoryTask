@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61e11aaa0c380364f93206fb470077df, type: 3}
-  m_Name: Potion
+  m_Script: {fileID: 11500000, guid: 852e10dc9e14d894eb710d4b0a35f4b3, type: 3}
+  m_Name: Cherry
   m_EditorClassIdentifier: 
-  <PermanentUsage>k__BackingField: 0
-  <IsStackable>k__BackingField: 1
-  <MaxStackSize>k__BackingField: 5
-  <Name>k__BackingField: Potion
+  <PermanentUsage>k__BackingField: 1
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Cherry
   <EquipType>k__BackingField: 0
-  <ItemImage>k__BackingField: {fileID: 3033333276935898593, guid: 0ba961d82dad0d64588584957b7aef4d,
+  <ItemImage>k__BackingField: {fileID: -3614966203691041757, guid: 0ba961d82dad0d64588584957b7aef4d,
     type: 3}
   modifiersData:
   - statModifier: {fileID: 11400000, guid: 98b07daf2b008ba4cbc9659d2d527838, type: 2}
-    value: 10
+    value: 1
   _statData: {fileID: 11400000, guid: 05bf5fffd007b384e960e5bfd1434ec4, type: 2}

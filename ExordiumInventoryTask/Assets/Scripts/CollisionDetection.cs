@@ -37,7 +37,7 @@ public class CollisionDetection : MonoBehaviour
          {
             foreach(Collider2D col in colliderArray)
             {
-                        if(col.CompareTag("Item"))
+                        if(col.CompareTag("InventoryItem"))
                         {
                             ObjectInRange = col.gameObject.name;
                             ProcessCollisionEnter(col.gameObject);
@@ -61,33 +61,49 @@ public class CollisionDetection : MonoBehaviour
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-            if (hit.collider != null && _pickUpEnabled && hit.collider.gameObject.CompareTag("Item")) 
+            if (hit.collider != null && _pickUpEnabled && hit.collider.gameObject.CompareTag("InventoryItem")) 
             {
                 Item item = ItemInRange;
-                if(_pickupController.CheckIsCanBeEquipped(item.SingleItem))
+                if(item.SingleItem.PermanentUsage)
                 {
-                    
                     SingleItem newItem = new SingleItem
-                    {
-                         Item = item.SingleItem,
-                        Quantity = item.Quantity 
-                    };
-                    IItemAction itemAction = newItem.Item as IItemAction;
-                    bool successEquippement = false;
-                    successEquippement = itemAction.PerformAction(gameObject, true);
-                    _equippementData.EquipItem(item.SingleItem, item.SingleItem.EquipType);
+                        {
+                            Item = item.SingleItem,
+                            Quantity = item.Quantity 
+                        };
+                        IItemAction itemAction = newItem.Item as IItemAction;
+                        bool successEquippement = false;
+                        successEquippement = itemAction.PerformAction(gameObject, true);
+                        Debug.Log("Permanent usage item " + item.SingleItem.Name + " has been used!");
                     item.DestroyItem();
-                        
                 }
                 else
                 {
-                    int reminder = _inventoryData.AddItem(ItemInRange.SingleItem, ItemInRange.Quantity);
-                    if(reminder == 0)
+                    if(_pickupController.CheckIsCanBeEquipped(item.SingleItem))
                     {
-                        ItemInRange.DestroyItem();
+                        
+                        SingleItem newItem = new SingleItem
+                        {
+                            Item = item.SingleItem,
+                            Quantity = item.Quantity 
+                        };
+                        IItemAction itemAction = newItem.Item as IItemAction;
+                        bool successEquippement = false;
+                        successEquippement = itemAction.PerformAction(gameObject, true);
+                        _equippementData.EquipItem(item.SingleItem, item.SingleItem.EquipType);
+                        item.DestroyItem();
+                            
                     }
-                    else{
-                        ItemInRange.Quantity = reminder;
+                    else
+                    {
+                        int reminder = _inventoryData.AddItem(ItemInRange.SingleItem, ItemInRange.Quantity);
+                        if(reminder == 0)
+                        {
+                            ItemInRange.DestroyItem();
+                        }
+                        else{
+                            ItemInRange.Quantity = reminder;
+                        }
                     }
                 }
             }

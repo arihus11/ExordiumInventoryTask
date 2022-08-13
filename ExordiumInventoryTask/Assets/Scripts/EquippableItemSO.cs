@@ -45,11 +45,11 @@ namespace Inventory.Model
 
     public enum EquipType
     {
-        HEAD,
+        NONE,
         BODY,
         WEAPON,
         SHIELD, 
-        NONE
+        HEAD
     }
 
 }

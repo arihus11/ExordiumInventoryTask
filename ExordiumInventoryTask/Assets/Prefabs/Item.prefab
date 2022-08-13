@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3272970671807369916}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Item
+  m_TagString: InventoryItem
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,4 +197,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SingleItem>k__BackingField: {fileID: 11400000, guid: 5fa3432497d78ff459f117ae8156d869,
     type: 2}
-  <Quantity>k__BackingField: 2
+  <Quantity>k__BackingField: 1
