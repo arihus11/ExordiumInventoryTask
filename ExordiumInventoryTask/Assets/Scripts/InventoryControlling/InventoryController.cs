@@ -213,13 +213,14 @@ namespace Inventory
             StatsButton.SetActive(true);
             }
         }
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        if(Input.GetKeyDown(KeyCode.Backspace) || InventorySlots.ItemDraggedOut)
         {
             int index = _inventoryUI.GetCurrentSelectedItem();
             if(index != -1)
             {
                 DropItem(index, _inventoryData.GetItemAt(index).Quantity);
             }
+            InventorySlots.ItemDraggedOut = false;
         }
     }
 }

@@ -23,6 +23,8 @@ namespace Inventory.UI
     [SerializeField]
     private RectTransform _contentPanel;
 
+    public static bool ItemDraggedOut = false;
+
     private bool _mouseOverDroppableArea = false;
 
     
@@ -40,6 +42,7 @@ namespace Inventory.UI
     private void Awake(){
         Hide();
         _mouseOverDroppableArea = false;
+        ItemDraggedOut = false;
      //   _mouseFollower.Toggle(false);
     }
 
@@ -162,6 +165,7 @@ namespace Inventory.UI
         if(_mouseOverDroppableArea)
             {
                 Debug.Log("Item dropped to the ground");
+                ItemDraggedOut = true;
                 _mouseFollower.ResetData();
                 _currentlyDraggedItemIndex = -1;
             }
