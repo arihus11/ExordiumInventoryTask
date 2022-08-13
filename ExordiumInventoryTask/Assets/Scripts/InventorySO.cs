@@ -40,17 +40,17 @@ public class InventorySO : ScriptableObject
     public int AddItem(ItemSO item, int quantity)
     {
         CreateNewInventoryRow();
-            if(item.IsStackable == false)
+        if(item.IsStackable == false)
         {
-            for(int i=0; i<_inventoryItems.Count; i++)
-            {       
-                while(quantity > 0)
-                {
-                    quantity -= AddItemToFirstFreeSlot(item,1);
+                for(int i=0; i<_inventoryItems.Count; i++)
+                {       
+                    while(quantity > 0)
+                    {
+                        quantity -= AddItemToFirstFreeSlot(item,1);
+                    }
+                    InformAboutChange();
+                    return quantity;    
                 }
-                InformAboutChange();
-                return quantity;    
-            }
         }
         quantity = AddStackableItem(item,quantity);
         InformAboutChange();
@@ -162,25 +162,42 @@ public class InventorySO : ScriptableObject
             }
             if(_inventoryItems[i].Item.ID == item.ID)
             {
-                int amountPossible = _inventoryItems[i].Item.MaxStackSize- _inventoryItems[i].Quantity;
-                if(quantity > amountPossible)
+                if(item.StackLimit == StackLimit.LIMITED)
                 {
-                    _inventoryItems[i] = _inventoryItems[i].ChangeQuantity(_inventoryItems[i].Item.MaxStackSize);
-                    quantity -= amountPossible;
+                    int amountPossible = _inventoryItems[i].Item.MaxStackSize - _inventoryItems[i].Quantity;
+
+                    if(quantity > amountPossible)
+                    {
+                        _inventoryItems[i] = _inventoryItems[i].ChangeQuantity(_inventoryItems[i].Item.MaxStackSize);
+                        quantity -= amountPossible;
+                    }
+                    else
+                    {
+                        _inventoryItems[i] = _inventoryItems[i].ChangeQuantity(_inventoryItems[i].Quantity + quantity);
+                        InformAboutChange();
+                        return 0;
+                    }
                 }
                 else
-                {
-                    _inventoryItems[i] = _inventoryItems[i].ChangeQuantity(_inventoryItems[i].Quantity + quantity);
-                    InformAboutChange();
-                    return 0;
+                {   
+                     _inventoryItems[i] = _inventoryItems[i].ChangeQuantity(_inventoryItems[i].Quantity + quantity);
+                     InformAboutChange();
+                     return 0;
                 }
             }
         }
-        while(quantity > 0)
+        if(item.StackLimit == StackLimit.LIMITED)
         {
-            int newQuantity = Mathf.Clamp(quantity,0, item.MaxStackSize);
-            quantity -= newQuantity;
-            AddItemToFirstFreeSlot(item, newQuantity);
+            while(quantity > 0)
+            {
+                int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStackSize);
+                quantity -= newQuantity;
+                AddItemToFirstFreeSlot(item, newQuantity);
+            }
+        }
+        else if(item.StackLimit == StackLimit.UNLIMITED)
+        {   
+            AddItemToFirstFreeSlot(item, quantity);
         }
         return quantity;
     }

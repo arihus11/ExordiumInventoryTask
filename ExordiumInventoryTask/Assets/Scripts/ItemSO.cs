@@ -16,6 +16,9 @@ namespace Inventory.Model
         public int ID => GetInstanceID();
 
         [field: SerializeField]
+        public StackLimit StackLimit { get; set; }
+
+        [field: SerializeField]
         public int MaxStackSize { get; set; } = 1;
         
         [field: SerializeField]
@@ -35,6 +38,12 @@ namespace Inventory.Model
     {
         public CharacterStatModifierSO statModifier;
         public int value;
+    }
+
+    public enum StackLimit
+    {
+        LIMITED,
+        UNLIMITED
     }
 }
 
