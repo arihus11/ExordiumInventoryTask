@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3272970671300946520, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3272970671300946524, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
         type: 3}
       propertyPath: m_Color.a
@@ -50,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 3272970671807369914, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
         type: 3}
       propertyPath: m_Name
-      value: Potions
+      value: Potions Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3272970671807369916, guid: fbdf5513c284fd24f8cf2e8238e4f50c,
         type: 3}

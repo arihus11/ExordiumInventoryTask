@@ -11,7 +11,7 @@ public class CollisionDetection : MonoBehaviour
     public GameObject PickUpMessage;
     public static bool _pickUpEnabled = false;
     public static Item ItemInRange;
-    private GameObject ObjectInRange;
+    public static String ObjectInRange;
     // Start is called before the first frame update
 
     [SerializeField]
@@ -24,6 +24,7 @@ public class CollisionDetection : MonoBehaviour
 
     void Start()
     {
+        ObjectInRange = "";
         _pickUpEnabled = false;
     }
 
@@ -32,29 +33,24 @@ public class CollisionDetection : MonoBehaviour
     {
         #region PHYSICS OVERLAP CIRCLE
          Collider2D[] colliderArray = Physics2D.OverlapCircleAll(transform.position, _range);
-         if(colliderArray.Length == 2){
+         if(colliderArray.Length >= 2)
+         {
             foreach(Collider2D col in colliderArray)
             {
-                    try
-                    {
                         if(col.CompareTag("Item"))
                         {
+                            ObjectInRange = col.gameObject.name;
                             ProcessCollisionEnter(col.gameObject);
-                            Array.Clear(colliderArray, 0, colliderArray.Length);
                         }
-                    }
-                    catch(System.NullReferenceException ex)
-                    {
-                        Debug.Log("Null reference ignored.");
-                    }
+                    
             }
         }
         else
         {
-            if(ObjectInRange!= null)
-            {
-                ProcessCollisionExit(ObjectInRange);
-            }
+            if(ObjectInRange != "")
+                GameObject.Find(ObjectInRange).gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            Array.Clear(colliderArray, 0, colliderArray.Length);
+            ProcessCollisionExit();
         }
         #endregion
 
@@ -102,15 +98,14 @@ public class CollisionDetection : MonoBehaviour
     void ProcessCollisionEnter(GameObject col){
             _pickUpEnabled = true;
             ItemInRange = col.GetComponent<Item>();
-            ObjectInRange = col;
             col.transform.GetChild(0).gameObject.SetActive(true);
             PickUpMessage.SetActive(true);
     }
 
-    void ProcessCollisionExit(GameObject col){
+    void ProcessCollisionExit()
+    {
             _pickUpEnabled = false;
-            ObjectInRange = null;
-            col.transform.GetChild(0).gameObject.SetActive(false);
             PickUpMessage.SetActive(false);
+            ObjectInRange = "";
     }
 }

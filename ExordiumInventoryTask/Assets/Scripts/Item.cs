@@ -21,7 +21,8 @@ public class Item : MonoBehaviour
 
     public void DestroyItem(){
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject);
+        CollisionDetection.ObjectInRange = "";
+        Destroy(this.gameObject);
     }
 
     public void SetSingleItem(ItemSO item)
