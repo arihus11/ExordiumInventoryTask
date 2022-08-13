@@ -186,19 +186,20 @@ public class InventorySO : ScriptableObject
                 }
             }
         }
-        if(item.StackLimit == StackLimit.LIMITED)
-        {
-            while(quantity > 0)
+        while(quantity > 0)
             {
-                int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStackSize);
-                quantity -= newQuantity;
-                AddItemToFirstFreeSlot(item, newQuantity);
+                if(item.StackLimit == StackLimit.LIMITED)
+                {
+                    int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStackSize);
+                    quantity -= newQuantity;
+                    AddItemToFirstFreeSlot(item, newQuantity);
+                }
+                else
+                {   
+                    AddItemToFirstFreeSlot(item, quantity);
+                    quantity = 0;
+                }
             }
-        }
-        else if(item.StackLimit == StackLimit.UNLIMITED)
-        {   
-            AddItemToFirstFreeSlot(item, quantity);
-        }
         return quantity;
     }
 

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Berries
   m_EditorClassIdentifier: 
   <PermanentUsage>k__BackingField: 0
-  <IsStackable>k__BackingField: 0
-  <StackLimit>k__BackingField: 0
+  <IsStackable>k__BackingField: 1
+  <StackLimit>k__BackingField: 1
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Berries
   <EquipType>k__BackingField: 0
   <ItemImage>k__BackingField: {fileID: 3674707457184596164, guid: 0ba961d82dad0d64588584957b7aef4d,
     type: 3}
-  modifiersData: []
-  _statData: {fileID: 0}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 98b07daf2b008ba4cbc9659d2d527838, type: 2}
+    value: 2
+  _statData: {fileID: 11400000, guid: 05bf5fffd007b384e960e5bfd1434ec4, type: 2}
