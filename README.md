@@ -8,8 +8,7 @@ Gumb za Unequip i RMB za istu akciju ne ažuriraju prikaz slotova unutar Equip P
 i statistika se računa kao da je Unequip akcija izvršena. Ako je igra pokrenuta unutar editora, sve funkcionalnosti svih panela rade ispravno i slotovi se ažuriraju ispravno.
 Zbog vremenskog ograničenja nisam uspio otkriti uzrok takve specifične razlike unutar editora i builda.
 
-Skaliranje sa veličinom ekrana je podešeno za 16:9 i 16:10, no moguće su sitne razlike unutar editora za razliku od build verzije. Unutar editora testiranje je preporučeno
-u FullHD(1920x1080).
+-> Problemi sa skaliranjem popravljeni nakon isteka roka za predaju
 
 UPUTE:
 ______

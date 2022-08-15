@@ -72,8 +72,9 @@ namespace Inventory.UI
 
     public void AddNewItemSlot()
     {
-            InventoryItem item = Instantiate(_itemPrefab, Vector3.zero,Quaternion.identity);
+            InventoryItem item = Instantiate(_itemPrefab);
             item.transform.SetParent(_contentPanel);
+            item.transform.localScale = _itemPrefab.transform.localScale;
             _listOfItems.Add(item);
             item.OnItemClicked += HandleItemSelection;
             item.OnItemBeginDrag += HandleBeginDrag;
@@ -81,7 +82,7 @@ namespace Inventory.UI
             item.OnItemEndDrag += HandleEndDrag;
             item.OnMiddleMouseButtonClicked += HandleShowItemActionsMiddle;
             item.OnRightMouseButtonClicked += HandleShowItemActionsRight;
-            item.OnRemoveButtonPressed += HandleRemoveButtonActions;
+            item.OnRemoveButtonPressed += HandleRemoveButtonActions; 
     }    
 
     public void UpdateSelection(int index)

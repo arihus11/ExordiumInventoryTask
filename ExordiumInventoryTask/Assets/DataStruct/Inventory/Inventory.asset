@@ -15,7 +15,7 @@ MonoBehaviour:
   _inventoryItems:
   - Quantity: 0
     Item: {fileID: 0}
-  - Quantity: 0
+  - Quantity: 1
     Item: {fileID: 0}
   - Quantity: 0
     Item: {fileID: 0}
